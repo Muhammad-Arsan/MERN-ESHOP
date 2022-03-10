@@ -8,8 +8,12 @@ const {
   getUserDetails,
   updatePassword,
   updateProfile,
+  getAllUser,
+  getSingleUser,
+  updateUserRole,
+  deleteUser,
 } = require("../controllers/userController");
-const { isAuthenticatedUser } = require("../middleware/auth");
+const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 const router = express.Router();
 
 router.route("/register").post(registerUser);

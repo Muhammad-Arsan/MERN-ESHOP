@@ -216,7 +216,7 @@ exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
 
   if (!user) {
     return next(
-      new ErrorHander(`User does not exist with Id: ${req.params.id}`)
+      new ErrorHandler(`User does not exist with Id: ${req.params.id}`)
     );
   }
 
@@ -251,7 +251,7 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
 
   if (!user) {
     return next(
-      new ErrorHander(`User does not exist with Id: ${req.params.id}`, 400)
+      new ErrorHandler(`User does not exist with Id: ${req.params.id}`, 400)
     );
   }
 

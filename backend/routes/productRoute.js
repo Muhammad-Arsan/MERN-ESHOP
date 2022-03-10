@@ -4,6 +4,9 @@ const {
   updateProduct,
   deleteProduct,
   getProductDetails,
+  createProductReview,
+  getProductReviews,
+  deleteReview,
 } = require("../controllers/productController");
 
 const express = require("express");
