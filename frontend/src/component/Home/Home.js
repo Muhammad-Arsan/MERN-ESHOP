@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CgMouse } from "react-icons/all";
 import "./Home.css";
 import Product from "./Product.js";
 import MetaData from "../layout/MetaData";
+import { getProduct } from "../../redux/actions/productActions";
+import { useSelector, useDispatch } from "react-redux";
 const Home = () => {
   const product = {
     name: "Product1",
@@ -10,6 +12,11 @@ const Home = () => {
     images: [{ url: "https://i.ibb.co/DRST11n/1.webp" }],
     _id: "arsan",
   };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProduct());
+  }, [dispatch]);
+
   return (
     <>
       <MetaData title="Home Page" />
