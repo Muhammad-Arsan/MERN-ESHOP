@@ -8,17 +8,18 @@ import {
 
 export const getProduct = () => async (dispatch) => {
   try {
-    dispatch({ ALL_PRODUCT_REQUEST });
+    dispatch({ type: ALL_PRODUCT_REQUEST });
     const { data } = await axios.get("/api/v1/products");
-    console.log("data============>", data);
+
     dispatch({
       type: ALL_PRODUCT_SUCCESS,
       payload: data,
     });
+    console.log("data============>", data);
   } catch (error) {
     dispatch({
       type: ALL_PRODUCT_FAIL,
-      payload: error.response,
+      payload: error.response.data.message,
     });
   }
 };
