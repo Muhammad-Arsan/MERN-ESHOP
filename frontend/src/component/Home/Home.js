@@ -1,43 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { CgMouse } from "react-icons/all";
 import "./Home.css";
-import Product from "./Product.js";
 import MetaData from "../layout/MetaData";
-
+import Loader from "../layout/Loader/loader";
 import { useSelector, useDispatch } from "react-redux";
-import { getProduct } from "../../redux/actions/productActions";
+import { clearErrors, getProduct } from "../../redux/actions/productActions";
+import { useAlert } from "react-alert";
+import ProductCard from "./ProductCard.js";
+
 const Home = () => {
-  const product = {
-    name: "Product1",
-    price: "200",
-    images: [{ url: "https://i.ibb.co/DRST11n/1.webp" }],
-    _id: "arsan",
-  };
-  // const allProduct = useSelector((state) => state.allProduct);
-  // const { products } = allProduct;
-  // console.log("products", products);
+  const alert = useAlert();
+  const allProduct = useSelector((state) => state.allProduct);
+  console.log("allproducts", allProduct);
+  const { products, loading, error, productCount } = allProduct;
+  console.log("products", products);
 
   const dispatch = useDispatch();
   useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
     dispatch(getProduct());
-  }, [dispatch]);
+  }, [dispatch, error, alert]);
   return (
-    <>
-      <MetaData title="Home Page" />
-      <div className="banner">
-        <p>Welcome to Ecommerce</p>
-        <h1>FIND AMAZING PRODUCTS BELOW</h1>
-        <a href="#container">
-          <button>
-            Scroll <CgMouse />
-          </button>
-        </a>
-      </div>
-      <h2 className="homeHeading">Featured Products</h2>
-      <div className="container" id="container">
-        <Product products={product} />
-      </div>
-    </>
+    <Fragment>
+      {loading ? (
+        <Loader />
+      ) : (
+        <Fragment>
+          <MetaData title="Home Page" />
+          <div className="banner">
+            <p>Welcome to Ecommerce</p>
+            <h1>FIND AMAZING PRODUCTS BELOW</h1>
+            <a href="#container">
+              <button>
+                Scroll <CgMouse />
+              </button>
+            </a>
+          </div>
+          <h2 className="homeHeading">Featured Products</h2>
+          <div className="container" id="container">
+            {products &&
+              products.map((product) => <ProductCard products={product} />)}
+          </div>
+        </Fragment>
+      )}
+    </Fragment>
   );
 };
 
