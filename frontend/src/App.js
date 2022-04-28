@@ -15,6 +15,7 @@ import UserOptions from "./component/layout/Header/UserOptions";
 import { useSelector } from "react-redux";
 import Profile from "./component/User/Profile";
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute";
+import UpdateProfile from "./component/User/UpdateProfile";
 import "react-toastify/dist/ReactToastify.css";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -24,7 +25,7 @@ function App() {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
-    store.dispatch(loadUser());
+    // store.dispatch(loadUser());
   }, []);
   return (
     <Router>
@@ -40,11 +41,12 @@ function App() {
           exact
           path="/account"
           element={
-            <PrivateRoute isAuthenticated={isAuthenticated}>
-              <Profile />
-            </PrivateRoute>
+            // <PrivateRoute>
+            <Profile />
+            //  </PrivateRoute>
           }
         />
+        <Route exact path="/me/update" element={<UpdateProfile />} />
         <Route exact path="/login" element={<LoginSignup />} />
       </Routes>
       {/* <Footer /> */}

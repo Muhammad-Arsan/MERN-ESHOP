@@ -44,7 +44,7 @@ const UserOptions = ({ user }) => {
   }
   return (
     <Fragment>
-      <Backdrop open={true} style={{ zIndex: "10" }} />
+      {/* <Backdrop open={true} style={{ zIndex: "-20" }} /> */}
       <SpeedDial
         ariaLabel="Speed Dial "
         onClose={() => setOpen(false)}

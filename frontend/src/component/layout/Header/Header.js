@@ -5,10 +5,12 @@ import WebFont from "webfontloader";
 const Header = () => {
   const options = {
     burgerColorHover: "#eb4034",
+    burgerColor: "#eb4034",
     logo,
     logoWidth: "20vmax",
     navColor1: "white",
     logoHoverSize: "10px",
+    zIndex: "-20px",
     logoHoverColor: "#eb4034",
     link1Text: "Home",
     link2Text: "Products",
@@ -35,7 +37,7 @@ const Header = () => {
     cartIconColorHover: "#eb4034",
     cartIconMargin: "1vmax",
   };
-  return <ReactNavbar {...options} />;
+  return <ReactNavbar {...options} style={{ zIndex: "-6px" }} />;
 };
 
 export default Header;

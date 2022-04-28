@@ -73,7 +73,7 @@ const LoginSignup = () => {
   const loginSubmit = (e) => {
     console.log("login Form Sbmitted");
     e.preventDefault();
-    dispatch(login(loginEmail, loginPassword));
+    dispatch(login(loginEmail, loginPassword, navigate));
   };
   const registerSubmit = (e) => {
     e.preventDefault();
