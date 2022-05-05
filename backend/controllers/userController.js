@@ -44,7 +44,7 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Invalid Email and password", 401));
   }
 
-  const isPasswordMatched = user.comparePassword(password);
+  const isPasswordMatched = await user.comparePassword(password);
 
   if (!isPasswordMatched) {
     return next(new ErrorHandler("Invalid Email or password ", 401));
@@ -78,9 +78,9 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   //Get resetpassword Token
   const resetToken = user.getResetPasswordToken();
   await user.save({ validateBeforeSave: false });
-  const resetPasswrodUrl = `${req.protocol}://${req.get(
+  const resetPasswordUrl = `${req.protocol}://${req.get(
     "host"
-  )}/api/v1/password/reset/${resetToken}`;
+  )}/password/reset/${resetToken}`;
 
   const message = `Your padsword reset token is : -\n\n ${resetPasswordUrl} \n\n 
   If You have not required this email then, please ignore it`;

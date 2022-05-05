@@ -17,11 +17,12 @@ import { UPDATE_PROFILE_RESET } from "../../redux/constants/userConstant";
 
 const UpdateProfile = () => {
   const { user } = useSelector((state) => state?.user);
+  console.log("user data", user);
   console.log("user", user);
   const { error, isUpdated, loading } = useSelector((state) => state?.profile);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [avatar, setAvatar] = useState();
+  const [avatar, setAvatar] = useState({});
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -112,7 +113,7 @@ const UpdateProfile = () => {
                 </div>
                 <input
                   type="submit"
-                  value="updateProfile"
+                  value="Update Profile"
                   className="updateProfileBtn"
                   // disabled={loading ? true : false}
                 />

@@ -3,11 +3,13 @@ import { useSelector } from "react-redux";
 import { Route } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 const PrivateRoute = ({ children }) => {
-  const { loading, isAthenticated, user } = useSelector((state) => state?.user);
+  const { loading, isAuthenticated, user } = useSelector(
+    (state) => state?.user
+  );
   // const what = useSelector((state) => state.user);
   // console.log("what", what);
   // console.log("isAuth", isAthenticated);
-  return isAthenticated ? children : <Navigate to="/login" />;
+  return isAuthenticated ? children : <Navigate to="/login" />;
   //     <Fragment>
 
   {

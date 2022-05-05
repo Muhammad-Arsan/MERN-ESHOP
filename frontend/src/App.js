@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
 import Header from "./component/layout/Header/Header.js";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Footer from "./component/layout/Footer/Footer";
@@ -16,7 +17,10 @@ import { useSelector } from "react-redux";
 import Profile from "./component/User/Profile";
 import PrivateRoute from "./component/PrivateRoute/PrivateRoute";
 import UpdateProfile from "./component/User/UpdateProfile";
-import "react-toastify/dist/ReactToastify.css";
+import UpdatePassword from "./component/User/UpdatePassword";
+import ForgotPassword from "./component/User/ForgotPassword";
+import ResetPassword from "./component/User/ResetPassword";
+import Cart from "./component/Cart/Cart";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   useEffect(() => {
@@ -34,19 +38,51 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/product/:id" element={<ProductDetails />} />
-        <Route exact path="/products" element={<Products />} />
+        <Route
+          exact
+          path="/products"
+          element={
+            <PrivateRoute>
+              <Products />
+            </PrivateRoute>
+          }
+        />
         <Route path="/products/:keyword" element={<Products />} />
         <Route exact path="/search" element={<Search />} />
         <Route
           exact
           path="/account"
           element={
-            // <PrivateRoute>
-            <Profile />
-            //  </PrivateRoute>
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
           }
         />
-        <Route exact path="/me/update" element={<UpdateProfile />} />
+        <Route
+          exact
+          path="/me/update"
+          element={
+            <PrivateRoute>
+              <UpdateProfile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path="/password/update"
+          element={
+            <PrivateRoute>
+              <UpdatePassword />
+            </PrivateRoute>
+          }
+        />{" "}
+        <Route exact path="/password/forgot" element={<ForgotPassword />} />
+        <Route
+          exact
+          path="/password/reset/:token"
+          element={<ResetPassword />}
+        />
+        <Route exact path="/Cart" element={<Cart />} />
         <Route exact path="/login" element={<LoginSignup />} />
       </Routes>
       {/* <Footer /> */}
