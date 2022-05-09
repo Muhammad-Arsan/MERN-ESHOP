@@ -21,6 +21,8 @@ import UpdatePassword from "./component/User/UpdatePassword";
 import ForgotPassword from "./component/User/ForgotPassword";
 import ResetPassword from "./component/User/ResetPassword";
 import Cart from "./component/Cart/Cart";
+import Shipping from "./component/Cart/Shipping";
+import ConfirmOrder from "./component/Cart/ConfirmOrder";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   useEffect(() => {
@@ -84,6 +86,24 @@ function App() {
         />
         <Route exact path="/Cart" element={<Cart />} />
         <Route exact path="/login" element={<LoginSignup />} />
+        <Route
+          exact
+          path="/login/shipping"
+          element={
+            <PrivateRoute>
+              <Shipping />
+            </PrivateRoute>
+          }
+        />{" "}
+        <Route
+          exact
+          path="/order/confirm"
+          element={
+            <PrivateRoute>
+              <ConfirmOrder />
+            </PrivateRoute>
+          }
+        />
       </Routes>
       {/* <Footer /> */}
     </Router>

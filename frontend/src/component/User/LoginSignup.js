@@ -1,7 +1,7 @@
 import React, { Fragment, useRef, useState, useEffect } from "react";
 import "./LoginSignup.css";
 import Loader from "../layout/Loader/loader";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import FaceIcon from "@material-ui/icons/Face";
@@ -31,16 +31,19 @@ const LoginSignup = () => {
   const { error, loading, isAuthenticated } = useSelector(
     (state) => state?.user
   );
+  const location = useLocation();
   const navigate = useNavigate();
+  console.log("name ", location.search);
+  const redirect = location.search ? location.search.split("=")[1] : "/account";
   useEffect(() => {
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
     if (isAuthenticated) {
-      navigate("/account");
+      navigate(redirect);
     }
-  }, [dispatch, error, alert, navigate, isAuthenticated]);
+  }, [dispatch, error, alert, navigate, isAuthenticated, redirect]);
   const switchTabs = (e, tab) => {
     if (tab === "login") {
       switcherTab.current.classList.add("shiftToNeutral");
