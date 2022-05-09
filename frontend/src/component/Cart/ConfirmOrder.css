@@ -10,7 +10,7 @@
 }
 
 .confirmshippingArea {
-  padding: 5vmax;
+  padding: 6vmax;
   padding-bottom: 0%;
 }
 
@@ -25,6 +25,7 @@
 
 .confirmshippingAreaBox > div {
   display: flex;
+  align-items: center;
   margin: 1vmax 0;
 }
 

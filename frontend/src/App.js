@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./component/layout/Header/Header.js";
@@ -23,8 +23,18 @@ import ResetPassword from "./component/User/ResetPassword";
 import Cart from "./component/Cart/Cart";
 import Shipping from "./component/Cart/Shipping";
 import ConfirmOrder from "./component/Cart/ConfirmOrder";
+import Payment from "./component/Cart/Payment";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
+  const [stripeApiKey, setStripeApiKey] = useState("");
+
+  async function getStripeApiKey() {
+    const { data } = await axios.get("/api/v1/stripeapikey");
+    setStripeApiKey(data.stripeApiKey);
+  }
   useEffect(() => {
     WebFont.load({
       google: {
@@ -32,6 +42,7 @@ function App() {
       },
     });
     // store.dispatch(loadUser());
+    getStripeApiKey();
   }, []);
   return (
     <Router>
@@ -104,6 +115,17 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Elements stripe={loadStripe(stripeApiKey)}>
+          <Route
+            exact
+            path="/process/payment"
+            element={
+              <PrivateRoute>
+                <Payment />
+              </PrivateRoute>
+            }
+          />
+        </Elements>
       </Routes>
       {/* <Footer /> */}
     </Router>
