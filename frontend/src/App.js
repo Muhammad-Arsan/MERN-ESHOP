@@ -45,10 +45,24 @@ function App() {
     getStripeApiKey();
   }, []);
   return (
-    <Router>
+    <>
       <Header />
-      {isAuthenticated && <UserOptions user={user} />}
       <Routes>
+        {isAuthenticated && <UserOptions user={user} />}
+        {stripeApiKey && (
+          <Elements stripe={loadStripe(stripeApiKey)}>
+            <Route
+              exact
+              path="/process/payment"
+              element={
+                <PrivateRoute>
+                  <Payment />
+                </PrivateRoute>
+              }
+            />
+          </Elements>
+        )}
+        {/* <Switch> */}
         <Route exact path="/" element={<Home />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route
@@ -115,20 +129,10 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Elements stripe={loadStripe(stripeApiKey)}>
-          <Route
-            exact
-            path="/process/payment"
-            element={
-              <PrivateRoute>
-                <Payment />
-              </PrivateRoute>
-            }
-          />
-        </Elements>
+        {/* </Switch> */}
+        {/* <Footer /> */}
       </Routes>
-      {/* <Footer /> */}
-    </Router>
+    </>
   );
 }
 
