@@ -24,7 +24,7 @@ const Payment = () => {
   return (
     <Fragment>
       <MetaData title="Payment"></MetaData>
-      {/* <CheckoutSteps activeStep={2}/> */}
+      <CheckoutSteps activeStep={2} />
       <div className="paymentContainer">
         <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
           <Typography>Card Info</Typography>

@@ -48,21 +48,14 @@ function App() {
     <>
       <Router>
         <Header />
+        {isAuthenticated && <UserOptions user={user} />}
+
         <Routes>
-          {isAuthenticated && <UserOptions user={user} />}
-          {stripeApiKey && (
+          {/* {stripeApiKey && (
             <Elements stripe={loadStripe(stripeApiKey)}>
-              <Route
-                exact
-                path="/process/payment"
-                element={
-                  <PrivateRoute>
-                    <Payment />
-                  </PrivateRoute>
-                }
-              />
+              <Route exact path="/process/payment" element={<Payment />} />
             </Elements>
-          )}
+          )} */}
           <Route exact path="/" element={<Home />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route

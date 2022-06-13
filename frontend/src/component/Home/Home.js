@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect } from "react";
 import { CgMouse } from "react-icons/all";
 import "./Home.css";
 import MetaData from "../layout/MetaData";
@@ -11,9 +11,8 @@ import ProductCard from "./ProductCard.js";
 const Home = () => {
   const alert = useAlert();
   const allProduct = useSelector((state) => state.allProduct);
-  console.log("allproducts", allProduct);
+
   const { products, loading, error, productCount } = allProduct;
-  console.log("products", products);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -23,6 +22,7 @@ const Home = () => {
     }
     dispatch(getProduct());
   }, [dispatch, error, alert]);
+
   return (
     <Fragment>
       {loading ? (
@@ -42,7 +42,9 @@ const Home = () => {
           <h2 className="homeHeading">Featured Products</h2>
           <div className="container" id="container">
             {products &&
-              products.map((product) => <ProductCard products={product} />)}
+              products.map((product, index) => (
+                <ProductCard key={index} products={product} />
+              ))}
           </div>
         </Fragment>
       )}
