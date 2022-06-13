@@ -46,92 +46,91 @@ function App() {
   }, []);
   return (
     <>
-      <Header />
-      <Routes>
-        {isAuthenticated && <UserOptions user={user} />}
-        {stripeApiKey && (
-          <Elements stripe={loadStripe(stripeApiKey)}>
-            <Route
-              exact
-              path="/process/payment"
-              element={
-                <PrivateRoute>
-                  <Payment />
-                </PrivateRoute>
-              }
-            />
-          </Elements>
-        )}
-        {/* <Switch> */}
-        <Route exact path="/" element={<Home />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
-        <Route
-          exact
-          path="/products"
-          element={
-            <PrivateRoute>
-              <Products />
-            </PrivateRoute>
-          }
-        />
-        <Route path="/products/:keyword" element={<Products />} />
-        <Route exact path="/search" element={<Search />} />
-        <Route
-          exact
-          path="/account"
-          element={
-            <PrivateRoute>
-              <Profile />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          exact
-          path="/me/update"
-          element={
-            <PrivateRoute>
-              <UpdateProfile />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          exact
-          path="/password/update"
-          element={
-            <PrivateRoute>
-              <UpdatePassword />
-            </PrivateRoute>
-          }
-        />{" "}
-        <Route exact path="/password/forgot" element={<ForgotPassword />} />
-        <Route
-          exact
-          path="/password/reset/:token"
-          element={<ResetPassword />}
-        />
-        <Route exact path="/Cart" element={<Cart />} />
-        <Route exact path="/login" element={<LoginSignup />} />
-        <Route
-          exact
-          path="/login/shipping"
-          element={
-            <PrivateRoute>
-              <Shipping />
-            </PrivateRoute>
-          }
-        />{" "}
-        <Route
-          exact
-          path="/order/confirm"
-          element={
-            <PrivateRoute>
-              <ConfirmOrder />
-            </PrivateRoute>
-          }
-        />
-        {/* </Switch> */}
-        {/* <Footer /> */}
-      </Routes>
+      <Router>
+        <Header />
+        <Routes>
+          {isAuthenticated && <UserOptions user={user} />}
+          {stripeApiKey && (
+            <Elements stripe={loadStripe(stripeApiKey)}>
+              <Route
+                exact
+                path="/process/payment"
+                element={
+                  <PrivateRoute>
+                    <Payment />
+                  </PrivateRoute>
+                }
+              />
+            </Elements>
+          )}
+          <Route exact path="/" element={<Home />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route
+            exact
+            path="/products"
+            element={
+              <PrivateRoute>
+                <Products />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/products/:keyword" element={<Products />} />
+          <Route exact path="/search" element={<Search />} />
+          <Route
+            exact
+            path="/account"
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            exact
+            path="/me/update"
+            element={
+              <PrivateRoute>
+                <UpdateProfile />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            exact
+            path="/password/update"
+            element={
+              <PrivateRoute>
+                <UpdatePassword />
+              </PrivateRoute>
+            }
+          />{" "}
+          <Route exact path="/password/forgot" element={<ForgotPassword />} />
+          <Route
+            exact
+            path="/password/reset/:token"
+            element={<ResetPassword />}
+          />
+          <Route exact path="/Cart" element={<Cart />} />
+          <Route exact path="/login" element={<LoginSignup />} />
+          <Route
+            exact
+            path="/login/shipping"
+            element={
+              <PrivateRoute>
+                <Shipping />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            exact
+            path="/order/confirm"
+            element={
+              <PrivateRoute>
+                <ConfirmOrder />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </Router>
     </>
   );
 }
