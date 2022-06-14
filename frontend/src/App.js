@@ -27,6 +27,7 @@ import Payment from "./component/Cart/Payment";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
   const [stripeApiKey, setStripeApiKey] = useState("");
