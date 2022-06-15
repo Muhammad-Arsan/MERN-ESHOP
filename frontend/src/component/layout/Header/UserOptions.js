@@ -33,6 +33,7 @@ const UserOptions = ({ user }) => {
 
     { icon: <ExitToAppIcon />, name: "logout", func: logoutUser },
   ];
+
   if (user.role === "admin") {
     options.unshift({
       icon: <DashboardIcon />,
@@ -42,22 +43,27 @@ const UserOptions = ({ user }) => {
   }
 
   function dashboard() {
-    navigate("/dashboard");
+    navigate("/admin/dashboard");
   }
+
   function orders() {
     navigate("/orders");
   }
+
   function account() {
     navigate("/account");
   }
+
   function cart() {
     navigate("/cart");
   }
+
   function logoutUser() {
     dispatch(logout());
     alert.success("Logout SuccessFully");
     navigate("/login");
   }
+
   return (
     <Fragment>
       {/* <Backdrop open={true} style={{ zIndex: "-20" }} /> */}
@@ -86,10 +92,6 @@ const UserOptions = ({ user }) => {
             tooltipOpen={window.innerWidth <= 600 ? true : false}
           />
         ))}
-        {/* <SpeedDialAction
-          icon={<DashboardIcon />}
-          tooltipTitle="Dashboard"
-        ></SpeedDialAction> */}
       </SpeedDial>
     </Fragment>
   );

@@ -27,6 +27,7 @@ import Payment from "./component/Cart/Payment";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import Dashboard from "./component/admin/Dashboard";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -45,6 +46,7 @@ function App() {
     // store.dispatch(loadUser());
     getStripeApiKey();
   }, []);
+
   return (
     <>
       <Router>
@@ -123,6 +125,7 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route exact path="/admin/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
     </>
